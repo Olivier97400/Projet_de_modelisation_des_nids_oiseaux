@@ -12,6 +12,7 @@ param_quantile2 <- function(X,J){
   N <- length(X)
   Alpha = rep(1/J,J)
   Mean <- rep(NA,J)
+  Sd <- rep(NA,J)
   X <- sort(X)
   
   index1_Q <- 1
@@ -19,12 +20,13 @@ param_quantile2 <- function(X,J){
   for(j in 1:J-1){
     index2_Q <- floor(j*N/J)+1
     Mean[j] <- mean(X[index1_Q:index2_Q])
+    Sd[j] <- sqrt(var(X[index1_Q:index2_Q]))
     index1_Q <- index2_Q+1
+    
   }
   Mean[J] <- mean(X[index1_Q:N])
-  
-  Sd <- sqrt(var(X[1:floor(N/J)+1]))
-  Sd <- rep(Sd,J)
+  Sd[J] <- sqrt(var(X[index1_Q:N]))
+
   
   data <- data.frame(init_alpha = Alpha, init_mu = Mean, init_sd = Sd)
   return(data)

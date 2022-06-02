@@ -11,12 +11,12 @@ param_quantile1 <- function(X,J){
   N <- length(X)
   Alpha = rep(1/J,J)
   Mean <- rep(NA,J)
+  X <- sort(X)
   
   for(j in 1:J){
-    Mean[j] <- floor(j*N/J+1)
+    Mean[j] <- X[floor(j*N/(J+1))]
   }
   
-  X <- sort(X)
   Sd <- sqrt(var(X[1:Mean[1]]))
   Sd <- rep(Sd,J)
   
