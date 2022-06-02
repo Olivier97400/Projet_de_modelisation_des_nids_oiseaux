@@ -20,7 +20,7 @@ param_init <- function(data,X){
   for(i in seq(1,col,by = 3)){
     data_i <- data.frame(espèces = data[,1], alpha = data[,i+1],
                          moyennes = data[,i+2], sd = data[,i+3])
-    data_i <- algo_EM(data_i,X)
+    data_i <- algo_EM(data_i,X,100)
     log_Vrai <- log_Vrais_X(data_i,X)
     if (res <= log_Vrai){
       res <- log_Vrai
